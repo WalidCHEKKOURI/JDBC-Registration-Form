@@ -44,6 +44,8 @@ public class RegistrationForm extends javax.swing.JFrame {
         jbListUsers = new javax.swing.JButton();
         jlProfil = new javax.swing.JLabel();
         jbDeleteUser = new javax.swing.JButton();
+        jlName1 = new javax.swing.JLabel();
+        jtfId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -79,6 +81,11 @@ public class RegistrationForm extends javax.swing.JFrame {
                 "Nom", "Login", "Profil"
             }
         ));
+        jtUsersInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtUsersInfoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jtUsersInfo);
 
         jcbProfil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Professor", "Director", "Student" }));
@@ -104,6 +111,10 @@ public class RegistrationForm extends javax.swing.JFrame {
             }
         });
 
+        jlName1.setText("Id");
+
+        jtfId.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,6 +127,12 @@ public class RegistrationForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                         .addComponent(jcbProfil, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbAddUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbListUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbDeleteUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -124,17 +141,15 @@ public class RegistrationForm extends javax.swing.JFrame {
                                 .addGap(37, 37, 37))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jlName1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(11, 11, 11)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfId)
                             .addComponent(jtfName)
                             .addComponent(jtfLogin)
-                            .addComponent(jtfPassword)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbAddUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbListUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbDeleteUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jtfPassword))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -142,9 +157,13 @@ public class RegistrationForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlName1)
+                            .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlName)
                             .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -164,9 +183,7 @@ public class RegistrationForm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbAddUser)
                             .addComponent(jbDeleteUser)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbListUsers)
                 .addContainerGap())
@@ -178,7 +195,8 @@ public class RegistrationForm extends javax.swing.JFrame {
     private void jbAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddUserActionPerformed
         String name = jtfName.getText();
         String login = jtfLogin.getText();
-        String password = jtfPassword.getPassword().toString();
+     // String password = jtfPassword.getPassword().toString();
+        String password = jtfPassword.getText().toString();
         int profile = jcbProfil.getSelectedIndex();
         
         User user1 = new User(name, login, password, profile );
@@ -232,6 +250,29 @@ public class RegistrationForm extends javax.swing.JFrame {
           
        
     }//GEN-LAST:event_jbDeleteUserActionPerformed
+
+    private void jtUsersInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtUsersInfoMouseClicked
+       int row= jtUsersInfo.getSelectedRow();
+       
+       int id = Integer.parseInt(jtUsersInfo.getValueAt(row, 0).toString());
+       String name = jtUsersInfo.getValueAt(row, 1).toString();
+       String login = jtUsersInfo.getValueAt(row, 2).toString();
+       String profil = jtUsersInfo.getValueAt(row, 4).toString();
+      
+
+
+       if(profil.equalsIgnoreCase("Professor"))
+           jcbProfil.setSelectedIndex(0);
+       else if (profil.equalsIgnoreCase("Director"))
+           jcbProfil.setSelectedIndex(1);
+           else
+           jcbProfil.setSelectedIndex(2);
+       
+       jtfName.setText(name);
+       jtfLogin.setText(login);
+       
+       jtfId.setText(id+"");
+    }//GEN-LAST:event_jtUsersInfoMouseClicked
 
     public void updateTable()
     {
@@ -289,9 +330,11 @@ public class RegistrationForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcbProfil;
     private javax.swing.JLabel jlLogin;
     private javax.swing.JLabel jlName;
+    private javax.swing.JLabel jlName1;
     private javax.swing.JLabel jlPassword;
     private javax.swing.JLabel jlProfil;
     private javax.swing.JTable jtUsersInfo;
+    private javax.swing.JTextField jtfId;
     private javax.swing.JTextField jtfLogin;
     private javax.swing.JTextField jtfName;
     private javax.swing.JPasswordField jtfPassword;
